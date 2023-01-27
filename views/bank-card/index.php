@@ -43,8 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]);
 
-    $lrr =  Yii::$app->user->identity->id ;
-    echo $lrr;
+   
 
     ?>
 

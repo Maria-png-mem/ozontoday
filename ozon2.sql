@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 23 2023 г., 14:58
+-- Время создания: Янв 27 2023 г., 10:24
 -- Версия сервера: 8.0.30
--- Версия PHP: 7.2.34
+-- Версия PHP: 8.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -128,10 +128,11 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`id`, `id_user`, `text`, `rating`, `created_at`, `updated_at`, `id_product`) VALUES
-(1, 3, 'good nice', 5, '2023-01-01', '2023-01-23', 1),
-(2, 2, 'nu tkoe', 2, '2023-01-23', '2023-01-23', 1),
+(2, 2, 'nu tkoej', 2, '2023-01-23', '2023-01-26', 1),
 (3, 2, 'miceee', 2, '2023-01-23', '2023-01-23', 1),
-(4, 2, 'x v v', 2, '2023-01-23', '2023-01-23', 1);
+(4, 2, 'x v v', 2, '2023-01-23', '2023-01-23', 1),
+(5, 2, 'lolololo\r\n\r\n', 2, '2023-01-26', '2023-01-26', 1),
+(6, 4, 'LLlalalalal', 3, '2023-01-26', '2023-01-26', 2);
 
 -- --------------------------------------------------------
 
@@ -180,7 +181,8 @@ CREATE TABLE `delivery_address` (
 --
 
 INSERT INTO `delivery_address` (`id`, `id_user`, `name`, `id_city`, `street`, `house_number`, `flat_number`, `comment`) VALUES
-(1, 2, 'house liza', 1, 'Good', '34', 23, 'be loud');
+(1, 2, 'house ', 1, 'ааа', '34', 23, 'be loud'),
+(2, 2, 'дом', 3, 'тфтфт', '34', 34, 'не звонить');
 
 -- --------------------------------------------------------
 
@@ -251,7 +253,8 @@ CREATE TABLE `product` (
 INSERT INTO `product` (`id`, `name`, `sale_price`, `sale_flag`, `description`, `characteristic`, `id_company`, `rating`, `created_at`, `updated_at`, `created_by`, `price`, `id_category`) VALUES
 (1, 'spoon', '234 rub', 0, 'nice spoon. eat soup', 'silver', 1, 2, '2023-01-05', '2023-01-31', 3, '234 rub', 1),
 (2, 'knife', '345', 1, 'silver', 'silver', 2, 2, '2023-01-23', '2023-01-23', 2, '234', 3),
-(5, 'knifees', '33', 1, 'sc', 'dxc', 1, 65, '2023-01-23', '2023-01-23', 2, 'w3', 1);
+(5, 'knifees', '33', 1, 'sc', 'dxc', 1, 65, '2023-01-23', '2023-01-23', 2, 'w3', 1),
+(6, 'тарелка', '123', 1, 'хорош', 'вш ш', 1, 1, '2023-01-26', '2023-01-26', 2, '123', 1);
 
 -- --------------------------------------------------------
 
@@ -297,7 +300,7 @@ CREATE TABLE `user` (
   `sex` enum('муж','жен','не укажу') NOT NULL,
   `avatar` varchar(300) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `currency` set('rub','euro','usd') CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT '' COMMENT 'валюта',
-  `role` varchar(20) NOT NULL
+  `role` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
@@ -308,7 +311,13 @@ INSERT INTO `user` (`id`, `fio`, `email`, `phone`, `login`, `password`, `id_city
 (2, 'Елизавета Коротина Евгеньевна', 'crottop@mail.ru', '79119921426', 'crottop', '123', 1, '2003-01-17', 'жен', 'avatarLiza', 'rub', 'admin'),
 (3, 'Савенкова Мария Михайловна', 'lola@mail.ru', '89110885623', '12345', '2345', 3, '2023-01-04', 'жен', 'fffff', 'rub', 'admin'),
 (4, 'Аль Хай Там', 'aliaha@mail.ru', '123', '123', '123', 1, '2012-12-12', 'жен', '12', 'rub', '1'),
-(5, 'Аль Хай Тамww', '123', '+7 (323) 333 33 __', '333', '333', 1, '2023-01-22', 'жен', '222', 'euro', '1');
+(5, 'Аль Хай Тамww', '123', '+7 (323) 333 33 __', '333', '333', 1, '2023-01-22', 'жен', '222', 'euro', '1'),
+(6, 'лемур', 'm@m.ru', '+7 (765) 555 55 55', 'lola', 'lola', 1, '2023-01-07', 'муж', '3', 'rub', '1'),
+(7, 'лемур', 'md@m.ru', '+7 (765) 555 55 55', 'lolaa', 'lola', 1, '2023-01-07', 'муж', '3', 'rub', '1'),
+(8, 'чсмп', 'mddsd@m.ru', '+7 (345) 678 98 76', 'lolasss', '234', 2, '2023-01-28', 'муж', '3', 'rub', '0'),
+(9, 'чсмпир', 'mddd@m.ru', '+7 (654) 567 76 54', 'sdf', '345', 1, '2023-02-04', 'муж', 'sdfg', 'rub', 'user'),
+(10, 'чсм', 'mdkjh@m.ru', '+7 (765) 678 90 0_', 'admin', 'admin', 1, '2023-01-14', 'жен', '22', 'rub', '1'),
+(11, 'Сова Александровнна', 'mdddds@m.ru', '+7 (325) 673 33 34', 'lolamoon', 'lol', 2, '2023-02-05', 'муж', 'ddd', 'rub', '0');
 
 -- --------------------------------------------------------
 
@@ -464,7 +473,7 @@ ALTER TABLE `city`
 -- AUTO_INCREMENT для таблицы `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `company`
@@ -476,7 +485,7 @@ ALTER TABLE `company`
 -- AUTO_INCREMENT для таблицы `delivery_address`
 --
 ALTER TABLE `delivery_address`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `img_product`
@@ -494,7 +503,7 @@ ALTER TABLE `like`
 -- AUTO_INCREMENT для таблицы `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `purchase`
@@ -506,7 +515,7 @@ ALTER TABLE `purchase`
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT для таблицы `zakaz_items`

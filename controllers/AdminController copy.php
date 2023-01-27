@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 use app\models\RegForm;
-use Yii;
+use      Yii;
 use app\models\User;
 use app\models\UserSearch;
 use yii\web\Controller;
@@ -14,7 +14,25 @@ use yii\filters\VerbFilter;
  */
 class AdminController extends Controller
 {
-   
+  
+    // protected  function beforeAction($action)
+    // {
+    //      if(Yii::app()->user->isGuest|| Yii::app()->user->identity->role !=1){
+    //         $this->redirect(['/site/login']);
+    //         return false;
+    //      }
+    //      {
+    //          if(Yii::app()->user->isGuest)
+    //                Yii::app()->user->loginRequired ();
+    //      }
+    //      return true;
+    // }
+
+    /**
+     * Lists all User models.
+     *
+     * @return string
+     */
     public function actionIndex()
     {
         $searchModel = new UserSearch();
@@ -26,5 +44,5 @@ class AdminController extends Controller
         ]);
     }
 
-
+    
 }
